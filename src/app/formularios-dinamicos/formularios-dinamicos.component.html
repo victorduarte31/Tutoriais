@@ -1,0 +1,43 @@
+<div class="container">
+
+
+    <div class="form-group col-12 col-md-6 col-lg-3">
+        <label class="font-weight-bold">Quantidade de campos</label>
+        <select name="correcaoMonetaria" [(ngModel)]="quantidadeEscolhida" class="form-control"
+            (change)="changeCampoDinamico()">
+            <option [ngValue]="quantidade" *ngFor="let quantidade of qtdCampos">
+                {{quantidade}}
+            </option>
+        </select>
+    </div>
+
+
+    <form [formGroup]="formDinamico">
+        <div formArrayName="camposDinamicos" *ngFor="let campoDinamico of camposDinamicos.controls; let i = index">
+
+            <div [formGroupName]="i">
+
+                CAMPO NUMERO {{i + 1}}
+                <hr>
+
+                <div class="row">
+
+                    <label>Campo texto</label>
+                    <input type="text" class="form-control" formControlName="campoTexto"
+                        [class.campoObrigatorio]="camposDinamicos.at(i).get('campoTexto').errors?.required">
+
+                    <label>Campo Numerico</label>
+                    <input type="text" class="form-control" formControlName="campoNumerico"
+                        [class.campoObrigatorio]="camposDinamicos.at(i).get('campoNumerico').errors?.required">
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
